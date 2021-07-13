@@ -27,6 +27,20 @@ class Programa:
         return f'{self._nome} - {self.ano} - {self._likes} likes'
 
 
+class Playlist:
+    def __init__(self, nome, programas):
+        self.nome = nome
+        self._programas = programas
+
+    @property
+    def listagem(self):
+        return self._programas
+
+    @property
+    def tamanho(self):
+        return len(self._programas)
+
+
 class Filmes(Programa):
     def __init__(self, nome, ano, duracao):
         super().__init__(nome, ano)  # Chamando a superclasse Programa
@@ -34,7 +48,7 @@ class Filmes(Programa):
 
     # Criando o método imprime para a classe Filmes, utilizando o método especial "dunder str"
     def __str__(self):
-        return f'{programa.nome} - {programa.ano} - {self.duracao} min - {programa.likes} likes'
+        return f'Filme {programa.nome} - {programa.ano} - {self.duracao} min - {programa.likes} likes'
 
 
 class Seriados(Programa):
@@ -43,22 +57,36 @@ class Seriados(Programa):
         self.temporadas = temporadas
 
     # Criando o método imprime para a classe Seriados, utilizando o método especial "dunder str"
-    def __repr__(self):
-        return f'Série com __repr__ {programa.nome} - {programa.ano} - {self.temporadas} temporadas - {programa.likes} likes'
+    def __str__(self):
+        return f'Série {programa.nome} - {programa.ano} - {self.temporadas} temporadas - {programa.likes} likes'
 
 
 vingadores = Filmes('vingadores - guerra infinita', 2018, 160)
-vingadores.dar_likes()
-
-
 arquivox = Seriados('arquivo x', 1992, 11)
+demolidor = Seriados('demolidor', 2014, 2)
+tmep = Filmes('todo mundo em pânico', 1999, 100)
+
+vingadores.dar_likes()
+vingadores.dar_likes()
+vingadores.dar_likes()
+tmep.dar_likes()
+tmep.dar_likes()
+tmep.dar_likes()
 arquivox.dar_likes()
 arquivox.dar_likes()
+arquivox.dar_likes()
+arquivox.dar_likes()
+demolidor.dar_likes()
+demolidor.dar_likes()
 
+filmes_e_series = [arquivox, vingadores, tmep, demolidor]
+playlist_fim_de_semana = Playlist('fim de semana', filmes_e_series)
 
-filmes_e_series = [vingadores, arquivox]
+print(f'Tamanho da playlist: {playlist_fim_de_semana.tamanho}')
 
-for programa in filmes_e_series:
-    print(programa.__repr__())
+for programa in playlist_fim_de_semana.listagem:
     print(programa)
+
+print(f'Tem ou não tem? {demolidor in playlist_fim_de_semana.listagem}')
+
 
