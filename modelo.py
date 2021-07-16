@@ -32,12 +32,14 @@ class Playlist:
         self.nome = nome
         self._programas = programas
 
+    def __getitem__(self, item):
+        return self._programas[item]
+
     @property
     def listagem(self):
         return self._programas
 
-    @property
-    def tamanho(self):
+    def __len__(self):
         return len(self._programas)
 
 
@@ -82,11 +84,13 @@ demolidor.dar_likes()
 filmes_e_series = [arquivox, vingadores, tmep, demolidor]
 playlist_fim_de_semana = Playlist('fim de semana', filmes_e_series)
 
-print(f'Tamanho da playlist: {playlist_fim_de_semana.tamanho}')
+print(f'Tamanho da playlist: {len(playlist_fim_de_semana)}')
 
-for programa in playlist_fim_de_semana.listagem:
+for programa in playlist_fim_de_semana:
     print(programa)
 
-print(f'Tem ou não tem? {demolidor in playlist_fim_de_semana.listagem}')
+print(f'Tem ou não tem? {demolidor in playlist_fim_de_semana}')
+
+
 
 
